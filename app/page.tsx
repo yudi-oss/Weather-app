@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface WeatherData {
   city: string;
@@ -17,6 +17,11 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [history, setHistory] = useState<string[]>([]);
+  const [today, setToday] = useState("");
+
+  useEffect(() => {
+    setToday(new Date().toLocaleDateString());
+  }, []);
 
   const handleSearch = async () => {
     if (!city.trim()) {
@@ -79,7 +84,7 @@ export default function Home() {
         </p>
 
         <p className="text-center text-slate-400 mt-2 text-sm">
-          {new Date().toLocaleDateString()}
+          {today}
         </p>
 
         <div className="mt-8">
